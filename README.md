@@ -107,7 +107,53 @@ Once OMV is now configured, head back to the Pi via SSH, and paste the following
 ### Running our Docker-Compose file to install the Apps:
 
 
-#TODO: Grab git url, paste here
+1. Create a directory `mediaserver` on your home folder via `mkdir ~/mediaserver`, then download the docker-compose file here via curl:
+
+    `curl https://raw.githubusercontent.com/rvincemt/rpi-mediaserver/master/docker-compose.yml -o ~/mediaserver/docker-compose.yml`
+
+2. Check your /srv/ folder to know your shared drive directory via `ls /srv/`, then we can go ahead and modify the docker-compose file. Now's also the best time to register to Plex, login, and get your claim code at `https://www.plex.tv/claim/`.
+Here's a quick script to replace all of that references on the docker-compose file:
+    ```
+    folderName=$(ls /srv/  | grep dev-disk-by-label)
+    transmissionPass="change this to your preferred password"
+    claimCode="Replace Your Plex Claim Code Here"
+
+    sed -i "s/<your folder name here>/$folderName/" ~/mediaserver/docker-compose.yml
+    sed -i "s/<downloaderpassword>/$transmissionPass ~/mediaserver/docker-compose.yml
+    sed -i "s/<claim code>/$claimCode ~/mediaserver/docker-compose.yml
+    ```
+    Double-check the file via nano/vi on ~/mediaserver/docker-compose.yml before proceeding to the next step.
+
+3. Once done, we can provision it up! Enter the command below:
+
+```
+sudo docker-compose -f ~/mediaserver/docker-compose.yml up -d 
+```
+
+It will download all the images and create containers, and once done, you can check out the statuses via `sudo docker ps`.
+
+4. Check all UIs if it's up by checking the following addresses in your browser:
+
+    <b>Jackett:</b>
+    `http://<IP of your Pi>:9117`
+
+    <b>Sonarr</b>`
+    http://<IP of your Pi>:8989`
+
+    <b>Radarr</b>`
+    http://<IP of your Pi>:7878`
+
+    <b>LazyLibrarian</b>`
+    http://<IP of your Pi>:5299`
+
+    <b>Transmission</b>`
+    http://<IP of your Pi>:9091`
+
+    <b>Plex</b>`
+    http://<IP of your Pi>:32400`
+
+5. Once they're all up, proceed to configuring the following in this order: Jackett > Sonarr > Radarr > Plex.
+
 
 
 
