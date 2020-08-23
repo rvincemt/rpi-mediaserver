@@ -155,6 +155,68 @@ It will download all the images and create containers, and once done, you can ch
 5. Once they're all up, proceed to configuring the following in this order: Jackett > Sonarr > Radarr > Plex.
 
 
+## App Configurations:
+
+### Jackett:
+
+* On Jackett UI, start by clicking `Add Indexer` and select your source. Here's mine: (https://imgur.com/yVqH2Xs). Once done, take note of your API Key which is at the top-right side of the site. 
+
+### Sonarr:
+
+* On Sonarr UI, click `Indexer` > click the Plus Icon > `Torznab` > `Custom` and configure: https://imgur.com/yVqH2Xs
+
+* For the Downloader setting, click `Settings` > `Download Client` > click Plus Icon and click `Transmission.` Refer to these settings: https://imgur.com/zMrPd6A
+(your password should be the one you configured earlier on the docker-compose file)
+
+### Radarr:
+
+* Radarr setup should be the same with Sonarr as it shares almost the same UI. Setup the Indexer and Download Client settings.
+
+### Plex
+
+Now to the Plex UI (http://IP-Of-Your-Pi:32400), login (you should be registered at this point). 
+
+#### Adding Libraries:
+* Click on Settings (top Right), Libraries (left side, scrolldown), then Add Library. 
+
+    * Movies: Library Type: `Movie`, Click `Add Folder` and `Browse`, select `movies` on the left side` (https://imgur.com/mqKtg5F).
+    * TV Series: Library Type: `TV`, Click `Add Folder` and `Browse`, select `tv` on the left side` (https://imgur.com/aMgz4Qr).
+
+* After adding these folders, click on `Scan Library Files`. You can also enable auto-scanning of library via `Settings` > check on `Scan my Library Automatically` and check `Scan my library periodically`.
+
+
+
+
+## Adding Media.
+
+* On Sonarr (for TV), click `Series` > `Add Series` and start typing the preferred Series on the searchbar. Once you've searched, refer to these parameters and click the Magnifying Glass Icon: https://imgur.com/lH1EAas
+
+* On Radarr (for Movies), click `Add Movies` > Search for your preferred movie. Refer to these parameters, and click the Magnifying Glass to Add and Search for that movie. https://imgur.com/ST2Dqms
+
+
+## Verify the Download:
+
+On both Sonarr and Radarr, when it searches and found a matching movie, you can check the `Activity` button on the top-center, and check the queue. If you're not getting any, refer back to your indexer and downloader settings. 
+
+Once the download finishes, it'll be available on Plex.
+
+
+
+## Plex on your Devices:
+
+* Download Plex on your devices (Laptop, PC, Tablets, etc and signup)
+* Make sure that the libraries are on your Plex app by clicking `More` on your left side of the screen. Refer to the example: https://imgur.com/16ojP5T. 
+* If you notice that the download's completed but not showing on your folders, click on the respective folder's option (three dots), and `Scan Library Files`. If it's still not there, you probably have an issue with the folder references.
+
+
+
+
+
+
+
+
+
+
 
 
 
